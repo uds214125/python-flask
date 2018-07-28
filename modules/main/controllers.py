@@ -47,18 +47,18 @@ def getBookById(id):
 
 @main.route('/api/books/create', methods=['POST'])
 def saveBook():
-    docs_list  = mongo.db.Bookk.save({'name':'C++','year':2000})
+    docs_list  = mongo.db.Books.save({'name':'C++','year':2000})
     return json.dumps(docs_list, default=json_util.default)
 
 # save many books
 #   
-@main.route('/api/books/delete/<id>', methods=['PUT'])
-def deleteBookById(id):
+@main.route('/api/books/update/<id>', methods=['PUT'])
+def putBookById(id):
     docs_list  = mongo.db.Books.update({'_id':id},{'set':{}})
     return json.dumps(docs_list, default=json_util.default)
   
 @main.route('/api/books/delete/<id>', methods=['DELETE'])
-def putBookById(id):
+def deleteBookById(id):
     docs_list  = mongo.db.Books.remove({'_id':id})
     return json.dumps(docs_list, default=json_util.default)
   
