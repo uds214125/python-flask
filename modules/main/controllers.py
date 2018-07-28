@@ -17,7 +17,7 @@ def doLogin():
         # flash('Welcome')
 
         return Response(
-            response=json.dumps({'email':'uds@gmail.com', 'content':'Login successfull'}),
+            response=json.dumps({'email':'uds214125@gmail.com', 'content':'Login successfull'}),
             status=200,
             mimetype='application/json'
         )
@@ -25,11 +25,11 @@ def doLogin():
 @main.route('/api/users/logout', methods=['POST'])
 def doLogout():
     if 'userId' in session:
-        test = session['userId']
+        user = session['userId']
         session.clear()
 
         return jsonify(
-            data='logout successfull : ' + test,
+            data='logout successfull : ' + user,
             status=202
         )
     else:
@@ -47,14 +47,18 @@ def getBookById(id):
 
 @main.route('/api/books/create', methods=['POST'])
 def saveBook():
-    docs_list  = mongo.db.Books.save({'name':'C++','year':2000})
+    docs_list  = mongo.db.Books.save({'name':'C','year':1972})
     return json.dumps(docs_list, default=json_util.default)
 
 # save many books
-#   
+@main.route('/api/books/create-many', methods=['POST'])
+def saveBook():
+    docs_list  = mongo.db.Books.insertMany([{'name':'C','year':1972},{'name':'C++','year':1972}])
+    return json.dumps(docs_list, default=json_util.default)
+   
 @main.route('/api/books/update/<id>', methods=['PUT'])
 def putBookById(id):
-    docs_list  = mongo.db.Books.update({'_id':id},{'set':{}})
+    docs_list  = mongo.db.Books.update({'_id':id},{'set':{'name':'Let Us C'}})
     return json.dumps(docs_list, default=json_util.default)
   
 @main.route('/api/books/delete/<id>', methods=['DELETE'])
