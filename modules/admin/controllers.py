@@ -6,4 +6,4 @@ admin = Blueprint('admin', __name__)
 
 @admin.route('/')
 def index():
-    return "Admin"
+    return "I am admin"
