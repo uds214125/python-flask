@@ -1,2 +1,2 @@
 # python-flask
-A REST API using pythong, flask and mongodb.
+A REST API using python, flask and mongodb.
